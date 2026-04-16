@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offres de Stage — InternShip Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+.filter-bar { background:white; border-radius:10px; padding:1.2rem 1.5rem; box-shadow:var(--shadow); margin-bottom:1.5rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end; }
+.filter-bar .form-group { flex:1; min-width:160px; }
+.filter-bar .form-group label { font-size:0.82rem; }
+.filter-bar select, .filter-bar input { padding:0.5rem 0.7rem; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap">
+        <img src="data:image/jpeg;base64,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" alt="InternShip Manager Logo">
+        <span class="logo-text">InternShip Manager</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html" >Accueil</a></li>
+          <li><a href="offres.html" class="active">Offres</a></li>
+          <li><a href="espace-etudiant.html" >Espace Étudiant</a></li>
+          <li><a href="espace-entreprise.html" >Espace Entreprise</a></li>
+          <li><a href="about.html" >À propos</a></li>
+          <li><a href="contact.html" >Contact</a></li>
+          <li><a href="questionnaire.html">Questionnaire</a></li>
+          <li><a href="funpage.html">Fun Page 🎮</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+      <h1 class="section-title" style="margin-bottom:0;border:none;">Offres de Stage <span class="badge-live">320 offres</span></h1>
+      <a href="espace-etudiant.html" class="btn btn-secondary">📝 Postuler</a>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="form-group">
+        <label for="f-domain">Domaine</label>
+        <select id="f-domain">
+          <option>Tous les domaines</option>
+          <option>Informatique</option>
+          <option>Marketing</option>
+          <option>Finance</option>
+          <option>Génie Civil</option>
+          <option>Design</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-ville">Ville</label>
+        <select id="f-ville">
+          <option>Toutes les villes</option>
+          <option>Tunis</option>
+          <option>Sfax</option>
+          <option>Sousse</option>
+          <option>Monastir</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-duree">Durée</label>
+        <select id="f-duree">
+          <option>Toutes durées</option>
+          <option>1 mois</option>
+          <option>2 mois</option>
+          <option>3 mois</option>
+          <option>6 mois</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-keyword">Mot-clé</label>
+        <input type="text" id="f-keyword" placeholder="ex: Python, React...">
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button class="btn btn-primary" style="background:var(--blue-dark);color:white;border-radius:7px;padding:0.55rem 1.2rem;">🔍 Filtrer</button>
+      </div>
+    </div>
+
+    <!-- Offers Grid -->
+    <div class="offers-grid">
+      <div class="offer-card slide-in">
+        <h3>Développeur Web Front-End</h3>
+        <div class="company">🏢 TechVision SARL — Tunis</div>
+        <span class="tag tag-blue">Informatique</span>
+        <span class="tag tag-green">2 mois</span>
+        <span class="tag tag-orange">Non rémunéré</span>
+        <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.5rem;line-height:1.5;">Développement d'interfaces utilisateur avec HTML, CSS et React. Collaboration avec l'équipe design.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.82rem;padding:0.45rem 1rem;">Postuler →</a>
+      </div>
+      <div class="offer-card slide-in">
+        <h3>Analyste Marketing Digital</h3>
+        <div class="company">🏢 MediaPro — Sousse</div>
+        <span class="tag tag-blue">Marketing</span>
+        <span class="tag tag-green">3 mois</span>
+        <span class="tag tag-green">Rémunéré</span>
+        <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.5rem;line-height:1.5;">Analyse des campagnes digitales, gestion des réseaux sociaux et reporting SEO/SEM.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.82rem;padding:0.45rem 1rem;">Postuler →</a>
+      </div>
+      <div class="offer-card slide-in">
+        <h3>Stagiaire Développeur Back-End</h3>
+        <div class="company">🏢 InnoSoft — Sfax</div>
+        <span class="tag tag-blue">Informatique</span>
+        <span class="tag tag-green">2 mois</span>
+        <span class="tag tag-orange">Non rémunéré</span>
+        <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.5rem;line-height:1.5;">Développement d'APIs REST avec PHP et MySQL. Participation aux revues de code.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.82rem;padding:0.45rem 1rem;">Postuler →</a>
+      </div>
+      <div class="offer-card slide-in">
+        <h3>Assistant Comptable</h3>
+        <div class="company">🏢 CabinetFinance — Monastir</div>
+        <span class="tag tag-blue">Finance</span>
+        <span class="tag tag-green">1 mois</span>
+        <span class="tag tag-green">Rémunéré</span>
+        <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.5rem;line-height:1.5;">Saisie comptable, rapprochements bancaires et suivi des factures clients/fournisseurs.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.82rem;padding:0.45rem 1rem;">Postuler →</a>
+      </div>
+      <div class="offer-card slide-in">
+        <h3>Designer UX/UI</h3>
+        <div class="company">🏢 PixelStudio — Tunis</div>
+        <span class="tag tag-blue">Design</span>
+        <span class="tag tag-green">3 mois</span>
+        <span class="tag tag-green">Rémunéré</span>
+        <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.5rem;line-height:1.5;">Conception de maquettes avec Figma, tests utilisateurs et amélioration de l'expérience client.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.82rem;padding:0.45rem 1rem;">Postuler →</a>
+      </div>
+      <div class="offer-card slide-in">
+        <h3>Ingénieur Réseau Junior</h3>
+        <div class="company">🏢 NetSystems — Tunis</div>
+        <span class="tag tag-blue">Informatique</span>
+        <span class="tag tag-green">6 mois</span>
+        <span class="tag tag-green">Rémunéré</span>
+        <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.5rem;line-height:1.5;">Configuration de réseaux, monitoring d'infrastructure et support technique niveau 2.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.82rem;padding:0.45rem 1rem;">Postuler →</a>
+      </div>
+    </div>
+
+    <!-- Comparison Table of offers -->
+    <h2 class="section-title">Comparatif des Offres</h2>
+    <div class="table-wrap">
+      <table class="table-styled">
+        <thead>
+          <tr>
+            <th rowspan="2">Poste</th>
+            <th colspan="2">Localisation</th>
+            <th rowspan="2">Durée</th>
+            <th rowspan="2">Rémunération</th>
+            <th rowspan="2">Niveau</th>
+          </tr>
+          <tr>
+            <th>Entreprise</th>
+            <th>Ville</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Développeur Web Front-End</td><td>TechVision SARL</td><td>Tunis</td><td>2 mois</td><td class="pending">Non rémunéré</td><td>Bac+3</td></tr>
+          <tr><td>Analyste Marketing Digital</td><td>MediaPro</td><td>Sousse</td><td>3 mois</td><td class="highlight">600 DT/mois</td><td>Bac+4</td></tr>
+          <tr><td>Développeur Back-End</td><td>InnoSoft</td><td>Sfax</td><td>2 mois</td><td class="pending">Non rémunéré</td><td>Bac+3</td></tr>
+          <tr><td>Assistant Comptable</td><td>CabinetFinance</td><td>Monastir</td><td>1 mois</td><td class="highlight">400 DT/mois</td><td>Bac+2</td></tr>
+          <tr><td>Designer UX/UI</td><td>PixelStudio</td><td>Tunis</td><td>3 mois</td><td class="highlight">500 DT/mois</td><td>Bac+3</td></tr>
+          <tr><td>Ingénieur Réseau Junior</td><td>NetSystems</td><td>Tunis</td><td>6 mois</td><td class="highlight">800 DT/mois</td><td>Bac+5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>InternShip Manager</h4>
+        <p>Plateforme universitaire de gestion des stages académiques.</p>
+        <p>© 2026 InternShip Manager</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="offres.html">Offres de Stage</a>
+        <a href="espace-etudiant.html">Espace Étudiant</a>
+        <a href="espace-entreprise.html">Espace Entreprise</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📧 <a href="mailto:contact@internship-manager.tn">contact@internship-manager.tn</a></p>
+        <p>📞 +216 71 000 000</p>
+        <p>📍 Université de Tunis, Tunis, Tunisie</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Site Web de Gestion des Stages — Projet de Développement Web 2026
+    </div>
+  </footer>
+</body>
+</html>

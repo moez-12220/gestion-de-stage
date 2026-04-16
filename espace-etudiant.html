@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Étudiant — InternShip Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+.status-badge { display:inline-block; padding:0.2rem 0.8rem; border-radius:20px; font-size:0.78rem; font-weight:700; }
+.status-en-cours { background:#fff3cd; color:#856404; }
+.status-accepte { background:var(--green-light); color:#155724; }
+.status-refuse { background:#f8d7da; color:#721c24; }
+progress { width:100%; height:10px; border-radius:5px; accent-color: var(--blue-dark); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap">
+        <img src="data:image/jpeg;base64,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" alt="InternShip Manager Logo">
+        <span class="logo-text">InternShip Manager</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html" >Accueil</a></li>
+          <li><a href="offres.html" >Offres</a></li>
+          <li><a href="espace-etudiant.html" class="active">Espace Étudiant</a></li>
+          <li><a href="espace-entreprise.html" >Espace Entreprise</a></li>
+          <li><a href="about.html" >À propos</a></li>
+          <li><a href="contact.html" >Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+
+    <h1 class="section-title">Espace Étudiant</h1>
+    <div class="dash-grid">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>👤 Mon Profil</h3>
+        <div style="text-align:center;margin-bottom:1rem;">
+          <div style="width:60px;height:60px;border-radius:50%;background:var(--blue-pale);border:3px solid var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 0.5rem;">🎓</div>
+          <strong style="font-size:0.95rem;">Étudiant(e)</strong><br>
+          <small style="color:var(--gray-text);">Informatique — Bac+3</small>
+        </div>
+        <ul>
+          <li><a href="#candidature" class="active">📋 Mes Candidatures</a></li>
+          <li><a href="#suivi">📊 Suivi de Stage</a></li>
+          <li><a href="#postuler">➕ Nouvelle Candidature</a></li>
+          <li><a href="offres.html">🔍 Voir les Offres</a></li>
+          <li><a href="contact.html">📧 Contacter</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <div>
+        <!-- Alert -->
+        <div class="alert alert-info">ℹ️ Vous avez <strong>2 candidatures</strong> en attente de réponse.</div>
+
+        <!-- Candidatures Table -->
+        <div id="candidature">
+          <h2 class="section-title">Mes Candidatures</h2>
+          <!-- Zone de recherche dynamique -->
+          <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem;align-items:flex-end;">
+            <input type="text" id="recherche-keyword" placeholder="🔍 Rechercher (poste, entreprise, ville...)"
+              style="padding:0.5rem 1rem;border:1.5px solid #ddd;border-radius:7px;font-size:0.9rem;flex:1;min-width:180px;">
+            <select id="recherche-statut" style="padding:0.5rem 0.8rem;border:1.5px solid #ddd;border-radius:7px;font-size:0.9rem;">
+              <option value="">Tous les statuts</option>
+              <option value="En cours">En cours</option>
+              <option value="Accepté">Accepté</option>
+              <option value="Refusé">Refusé</option>
+            </select>
+            <button id="btn-rechercher" class="btn btn-primary" style="background:var(--blue-dark);color:white;border-radius:7px;padding:0.5rem 1rem;">🔍 Chercher</button>
+            <button id="btn-reset-recherche" class="btn btn-outline" style="padding:0.5rem 1rem;">✖ Reset</button>
+          </div>
+
+          <!-- Notification JS -->
+          <div id="notif-js" class="alert" style="display:none;margin-bottom:0.8rem;"></div>
+
+          <div class="table-wrap">
+            <table class="table-styled">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Poste</th>
+                  <th>Entreprise</th>
+                  <th>Ville</th>
+                  <th>Domaine</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-candidatures">
+                <!-- Rempli dynamiquement par espace-etudiant.js -->
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.82rem;color:var(--gray-text);margin-top:0.4rem;">
+            <strong id="compteur-candidatures">0</strong> candidature(s) affichée(s)
+          </p>
+        </div>
+
+
+        <!-- Formulaire Ajout de Candidature (dynamique) -->
+        <div id="ajout-candidature" style="margin-top:1.5rem;">
+          <h2 class="section-title" style="font-size:1rem;">➕ Ajouter une candidature manuellement</h2>
+          <form id="form-ajout-candidature" style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;background:#f8faff;padding:1.2rem;border-radius:10px;border:1.5px dashed var(--blue-light);">
+            <div class="form-group">
+              <label>Poste *</label>
+              <input type="text" id="ajout-poste" placeholder="ex: Développeur Web">
+            </div>
+            <div class="form-group">
+              <label>Entreprise *</label>
+              <input type="text" id="ajout-entreprise" placeholder="ex: TechVision">
+            </div>
+            <div class="form-group">
+              <label>Ville *</label>
+              <input type="text" id="ajout-ville" placeholder="ex: Tunis">
+            </div>
+            <div class="form-group">
+              <label>Domaine</label>
+              <select id="ajout-domaine">
+                <option value="Informatique">Informatique</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Design">Design</option>
+                <option value="Finance">Finance</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Statut</label>
+              <select id="ajout-statut">
+                <option value="En cours">En cours</option>
+                <option value="Accepté">Accepté</option>
+                <option value="Refusé">Refusé</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:flex-end;">
+              <button type="button" id="btn-ajouter-candidature" class="btn btn-secondary" style="width:100%;">➕ Ajouter</button>
+            </div>
+          </form>
+        </div>
+        <!-- Suivi de stage -->
+        <div id="suivi" style="margin-top:2rem;">
+          <h2 class="section-title">Suivi de Stage — PixelStudio</h2>
+          <div class="alert alert-success">✅ Convention signée le 03/03/2026 — Stage démarré</div>
+          <p style="margin-bottom:0.5rem;font-weight:600;">Progression globale :</p>
+          <progress value="35" max="100"></progress>
+          <p style="font-size:0.85rem;color:var(--gray-text);margin-top:0.3rem;">Semaine 1 sur 12 — 35% complété</p>
+        </div>
+
+        <!-- Form : Nouvelle Candidature -->
+        <div id="postuler" style="margin-top:2rem;">
+          <h2 class="section-title">Nouvelle Candidature</h2>
+          <form class="form-card" action="https://httpbin.org/get" method="GET">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nom">Nom complet *</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom et prénom" required>
+              </div>
+              <div class="form-group">
+                <label for="email-etu">Email universitaire *</label>
+                <input type="email" id="email-etu" name="email" placeholder="prenom.nom@univ.tn" required>
+              </div>
+              <div class="form-group">
+                <label for="tel">Téléphone</label>
+                <input type="tel" id="tel" name="tel" placeholder="+216 XX XXX XXX">
+              </div>
+              <div class="form-group">
+                <label for="niveau">Niveau d'études *</label>
+                <select id="niveau" name="niveau" required>
+                  <option value="">-- Sélectionner --</option>
+                  <option value="bac2">Bac+2</option>
+                  <option value="bac3">Bac+3 (Licence)</option>
+                  <option value="bac4">Bac+4 (Master 1)</option>
+                  <option value="bac5">Bac+5 (Master 2 / Ingénieur)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="offre-sel">Offre de stage *</label>
+                <select id="offre-sel" name="offre" required>
+                  <option value="">-- Choisir une offre --</option>
+                  <option value="webdev">Développeur Web Front-End — TechVision</option>
+                  <option value="marketing">Analyste Marketing — MediaPro</option>
+                  <option value="designer">Designer UX/UI — PixelStudio</option>
+                  <option value="backend">Développeur Back-End — InnoSoft</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="disponibilite">Disponible à partir du *</label>
+                <input type="date" id="disponibilite" name="dispo" required>
+              </div>
+              <div class="form-group">
+                <label for="cv">CV (PDF) *</label>
+                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+              </div>
+              <div class="form-group">
+                <label for="portfolio">Lien Portfolio / GitHub</label>
+                <input type="url" id="portfolio" name="portfolio" placeholder="https://github.com/...">
+              </div>
+              <div class="form-group full">
+                <label>Compétences techniques</label>
+                <div class="checkbox-group">
+                  <label><input type="checkbox" name="skills" value="html"> HTML/CSS</label>
+                  <label><input type="checkbox" name="skills" value="js"> JavaScript</label>
+                  <label><input type="checkbox" name="skills" value="php"> PHP</label>
+                  <label><input type="checkbox" name="skills" value="python"> Python</label>
+                  <label><input type="checkbox" name="skills" value="sql"> SQL</label>
+                  <label><input type="checkbox" name="skills" value="react"> React</label>
+                </div>
+              </div>
+              <div class="form-group full">
+                <label>Type de stage préféré</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="type_stage" value="presentiel"> Présentiel</label>
+                  <label><input type="radio" name="type_stage" value="teletravail"> Télétravail</label>
+                  <label><input type="radio" name="type_stage" value="hybride" checked> Hybride</label>
+                </div>
+              </div>
+              <div class="form-group full">
+                <label for="motivation">Lettre de motivation *</label>
+                <textarea id="motivation" name="motivation" placeholder="Expliquez pourquoi vous postulez à ce stage..." rows="5" required></textarea>
+              </div>
+              <div class="form-group full">
+                <label for="note-min">Note minimale souhaitée : <strong>14/20</strong></label>
+                <input type="range" id="note-min" name="note_min" min="10" max="20" value="14">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-secondary">📤 Envoyer ma candidature</button>
+              <button type="reset" class="btn btn-outline">🔄 Réinitialiser</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>InternShip Manager</h4>
+        <p>Plateforme universitaire de gestion des stages académiques.</p>
+        <p>© 2026 InternShip Manager</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="offres.html">Offres de Stage</a>
+        <a href="espace-etudiant.html">Espace Étudiant</a>
+        <a href="espace-entreprise.html">Espace Entreprise</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📧 <a href="mailto:contact@internship-manager.tn">contact@internship-manager.tn</a></p>
+        <p>📞 +216 71 000 000</p>
+        <p>📍 Université de Tunis, Tunis, Tunisie</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Site Web de Gestion des Stages — Projet de Développement Web 2026
+    </div>
+  </footer>
+  <script src="js/espace-etudiant.js"></script>
+</body>
+</html>

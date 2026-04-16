@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil — InternShip Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+/* Inline style on hero search bar */
+.search-bar { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; }
+.search-bar input { padding:0.75rem 1.2rem; border-radius:30px; border:none; font-size:1rem; min-width:280px; outline:none; }
+.testimonials { margin-bottom:2rem; }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+.testi-card { background:white; border-radius:10px; padding:1.5rem; box-shadow:var(--shadow); border-top:3px solid var(--green); }
+.testi-card p { font-style:italic; color:var(--gray-text); margin-bottom:0.8rem; line-height:1.6; }
+.testi-card .author { font-weight:700; color:var(--blue-dark); font-size:0.9rem; }
+@media(max-width:768px){.testi-grid{grid-template-columns:1fr;}}
+</style>
+  
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap">
+        <img src="data:image/jpeg;base64,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" alt="InternShip Manager Logo">
+        <span class="logo-text">InternShip Manager</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Accueil</a></li>
+          <li><a href="offres.html" >Offres</a></li>
+          <li><a href="espace-etudiant.html" >Espace Étudiant</a></li>
+          <li><a href="espace-entreprise.html" >Espace Entreprise</a></li>
+          <li><a href="about.html" >À propos</a></li>
+          <li><a href="contact.html" >Contact</a></li>
+          <li><a href="questionnaire.html">Questionnaire</a></li>
+          <li><a href="funpage.html">Fun Page 🎮</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>🎓 Bienvenue sur InternShip Manager</h1>
+      <p>La plateforme universitaire pour trouver, postuler et gérer vos stages académiques en toute simplicité.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="🔍 Rechercher un stage (ex: développeur, Tunis)...">
+        <a href="offres.html" class="btn btn-primary">Rechercher</a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-box"><span class="num">320+</span><span>Offres disponibles</span></div>
+      <div class="stat-box"><span class="num">150+</span><span>Entreprises partenaires</span></div>
+      <div class="stat-box"><span class="num">1 200+</span><span>Étudiants inscrits</span></div>
+      <div class="stat-box"><span class="num">95%</span><span>Taux de satisfaction</span></div>
+    </div>
+
+    <!-- Features -->
+    <h2 class="section-title">Nos Services</h2>
+    <div class="cards-flex">
+      <div class="card">
+        <div class="card-icon">🔍</div>
+        <h3>Recherche de Stages</h3>
+        <p>Consultez des centaines d'offres filtrées par domaine, ville et durée selon votre profil.</p>
+        <a href="offres.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem;padding:0.5rem 1.2rem;">Voir les offres</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>Candidature en Ligne</h3>
+        <p>Postulez directement depuis la plateforme avec votre CV et lettre de motivation.</p>
+        <a href="espace-etudiant.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem;padding:0.5rem 1.2rem;">Mon espace</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏢</div>
+        <h3>Espace Entreprise</h3>
+        <p>Publiez vos offres et gérez vos candidatures depuis un tableau de bord dédié.</p>
+        <a href="espace-entreprise.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem;padding:0.5rem 1.2rem;">Recruter</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Suivi Pédagogique</h3>
+        <p>Les enseignants suivent en temps réel l'avancement et l'évaluation des stagiaires.</p>
+        <a href="about.html" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem;padding:0.5rem 1.2rem;">En savoir plus</a>
+      </div>
+    </div>
+
+    <!-- Comment ça marche -->
+    <h2 class="section-title">Comment ça marche ?</h2>
+    <div class="table-wrap">
+      <table class="table-styled">
+        <thead>
+          <tr>
+            <th rowspan="2">Étape</th>
+            <th colspan="2">Acteurs</th>
+            <th rowspan="2">Résultat attendu</th>
+          </tr>
+          <tr>
+            <th>Étudiant</th>
+            <th>Entreprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1. Inscription</strong></td><td>Créer un compte étudiant</td><td>Créer un compte entreprise</td><td>Accès au tableau de bord</td></tr>
+          <tr><td><strong>2. Publication</strong></td><td>Consulter les offres</td><td>Publier une offre de stage</td><td>Offre visible sur la plateforme</td></tr>
+          <tr><td><strong>3. Candidature</strong></td><td>Postuler en ligne</td><td>Recevoir les candidatures</td><td class="highlight">Mise en relation</td></tr>
+          <tr><td><strong>4. Convention</strong></td><td>Signer la convention</td><td>Valider le stagiaire</td><td class="highlight">Stage officiel</td></tr>
+          <tr><td><strong>5. Évaluation</strong></td><td>Soumettre le rapport</td><td>Évaluer le stagiaire</td><td>Note finale validée</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <h2 class="section-title">Témoignages</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p>"Grâce à InternShip Manager, j'ai trouvé mon stage en moins d'une semaine. La plateforme est intuitive et les offres sont nombreuses."</p>
+          <span class="author">— Aymen B., Étudiant en Informatique</span>
+        </div>
+        <div class="testi-card">
+          <p>"Nous avons recruté deux excellents stagiaires via cette plateforme. La qualité des profils est remarquable."</p>
+          <span class="author">— RH, Société TechVision</span>
+        </div>
+        <div class="testi-card">
+          <p>"Le suivi pédagogique en ligne facilite énormément mon travail d'encadrement. Je recommande vivement."</p>
+          <span class="author">— Dr. Sami K., Enseignant-chercheur</span>
+        </div>
+      </div>
+    </section>
+
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="offres.html" class="btn btn-secondary" style="margin-right:1rem;">Voir les offres de stage</a>
+      <a href="contact.html" class="btn btn-outline">Nous contacter</a>
+    </div>
+
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>InternShip Manager</h4>
+        <p>Plateforme universitaire de gestion des stages académiques.</p>
+        <p>© 2026 InternShip Manager</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="offres.html">Offres de Stage</a>
+        <a href="espace-etudiant.html">Espace Étudiant</a>
+        <a href="espace-entreprise.html">Espace Entreprise</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📧 <a href="mailto:contact@internship-manager.tn">contact@internship-manager.tn</a></p>
+        <p>📞 +216 71 000 000</p>
+        <p>📍 Université de Tunis, Tunis, Tunisie</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Site Web de Gestion des Stages — Projet de Développement Web 2026
+    </div>
+  </footer>
+</body>
+</html>

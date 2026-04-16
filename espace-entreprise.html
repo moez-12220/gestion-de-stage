@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Entreprise — InternShip Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap">
+        <img src="data:image/jpeg;base64,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" alt="InternShip Manager Logo">
+        <span class="logo-text">InternShip Manager</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html" >Accueil</a></li>
+          <li><a href="offres.html" >Offres</a></li>
+          <li><a href="espace-etudiant.html" >Espace Étudiant</a></li>
+          <li><a href="espace-entreprise.html" class="active">Espace Entreprise</a></li>
+          <li><a href="about.html" >À propos</a></li>
+          <li><a href="contact.html" >Contact</a></li>
+          <li><a href="questionnaire.html">Questionnaire</a></li>
+          <li><a href="funpage.html">Fun Page 🎮</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+
+    <h1 class="section-title">Espace Entreprise</h1>
+    <div class="dash-grid">
+      <aside class="sidebar">
+        <h3>🏢 Mon Entreprise</h3>
+        <div style="text-align:center;margin-bottom:1rem;">
+          <div style="width:60px;height:60px;border-radius:50%;background:var(--blue-pale);border:3px solid var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 0.5rem;">🏢</div>
+          <strong>TechVision SARL</strong><br>
+          <small style="color:var(--gray-text);">Informatique — Tunis</small>
+        </div>
+        <ul>
+          <li><a href="#offres-ent" class="active">📋 Mes Offres</a></li>
+          <li><a href="#candidats">👥 Candidatures</a></li>
+          <li><a href="#publier">➕ Publier une Offre</a></li>
+          <li><a href="#evaluer">⭐ Évaluer</a></li>
+        </ul>
+      </aside>
+
+      <div>
+        <div class="alert alert-info">ℹ️ Vous avez <strong>8 nouvelles candidatures</strong> à examiner.</div>
+
+        <!-- Mes offres -->
+        <div id="offres-ent">
+          <h2 class="section-title">Mes Offres Publiées</h2>
+          <div class="table-wrap">
+            <table class="table-styled">
+              <thead>
+                <tr>
+                  <th>Poste</th>
+                  <th>Domaine</th>
+                  <th>Date limite</th>
+                  <th>Candidatures</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Développeur Web</strong></td><td>Informatique</td><td>30/03/2026</td>
+                  <td style="text-align:center;font-weight:700;color:var(--blue-dark);">8</td>
+                  <td><span class="tag tag-green">Active</span></td>
+                  <td><a href="#candidats" style="color:var(--blue-light);font-size:0.85rem;margin-right:0.5rem;">Voir</a><a href="#" style="color:#dc3545;font-size:0.85rem;">Fermer</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Ingénieur Réseau</strong></td><td>Réseaux</td><td>15/04/2026</td>
+                  <td style="text-align:center;font-weight:700;color:var(--blue-dark);">3</td>
+                  <td><span class="tag tag-green">Active</span></td>
+                  <td><a href="#candidats" style="color:var(--blue-light);font-size:0.85rem;margin-right:0.5rem;">Voir</a><a href="#" style="color:#dc3545;font-size:0.85rem;">Fermer</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Data Analyst</strong></td><td>Data Science</td><td>01/02/2026</td>
+                  <td style="text-align:center;">5</td>
+                  <td><span class="tag tag-orange">Fermée</span></td>
+                  <td><a href="#" style="color:var(--blue-light);font-size:0.85rem;">Renouveler</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Candidatures reçues -->
+        <div id="candidats" style="margin-top:2rem;">
+          <h2 class="section-title">Candidatures Reçues — Développeur Web</h2>
+          <div class="table-wrap">
+            <table class="table-styled">
+              <thead>
+                <tr>
+                  <th>Candidat</th>
+                  <th>Niveau</th>
+                  <th>Date</th>
+                  <th>Compétences</th>
+                  <th>Décision</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Ahmed Ben Ali</td><td>Bac+3</td><td>02/03/2026</td><td>HTML, CSS, JavaScript</td><td><span class="tag tag-green">Accepté</span></td></tr>
+                <tr><td>Fatma Cherif</td><td>Bac+4</td><td>03/03/2026</td><td>React, PHP, SQL</td><td><span class="tag tag-orange">En attente</span></td></tr>
+                <tr><td>Mohamed Trabelsi</td><td>Bac+3</td><td>04/03/2026</td><td>HTML, CSS</td><td><span class="tag tag-orange">En attente</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Formulaire publication -->
+        <div id="publier" style="margin-top:2rem;">
+          <h2 class="section-title">Publier une Nouvelle Offre</h2>
+          <form class="form-card" action="https://httpbin.org/get" method="GET">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="titre-offre">Titre du poste *</label>
+                <input type="text" id="titre-offre" name="titre" placeholder="ex: Développeur Web Front-End" required>
+              </div>
+              <div class="form-group">
+                <label for="domaine-offre">Domaine *</label>
+                <select id="domaine-offre" name="domaine" required>
+                  <option value="">-- Sélectionner --</option>
+                  <option>Informatique</option>
+                  <option>Marketing</option>
+                  <option>Finance</option>
+                  <option>Design</option>
+                  <option>Génie Civil</option>
+                  <option>Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="duree-offre">Durée du stage *</label>
+                <select id="duree-offre" name="duree" required>
+                  <option value="">-- Sélectionner --</option>
+                  <option>1 mois</option>
+                  <option>2 mois</option>
+                  <option>3 mois</option>
+                  <option>6 mois</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ville-offre">Ville *</label>
+                <input type="text" id="ville-offre" name="ville" placeholder="ex: Tunis" required>
+              </div>
+              <div class="form-group">
+                <label for="date-limite">Date limite candidature *</label>
+                <input type="date" id="date-limite" name="date_limite" required>
+              </div>
+              <div class="form-group">
+                <label for="nb-postes">Nombre de postes</label>
+                <input type="number" id="nb-postes" name="nb_postes" min="1" max="10" value="1">
+              </div>
+              <div class="form-group full">
+                <label>Rémunération</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="remuneration" value="non"> Non rémunéré</label>
+                  <label><input type="radio" name="remuneration" value="oui" checked> Rémunéré</label>
+                </div>
+              </div>
+              <div class="form-group full">
+                <label for="desc-offre">Description du poste et missions *</label>
+                <textarea id="desc-offre" name="description" placeholder="Décrivez les missions, les compétences requises..." rows="5" required></textarea>
+              </div>
+              <div class="form-group full">
+                <label>Technologies requises</label>
+                <div class="checkbox-group">
+                  <label><input type="checkbox" name="tech" value="html"> HTML/CSS</label>
+                  <label><input type="checkbox" name="tech" value="js"> JavaScript</label>
+                  <label><input type="checkbox" name="tech" value="php"> PHP</label>
+                  <label><input type="checkbox" name="tech" value="python"> Python</label>
+                  <label><input type="checkbox" name="tech" value="java"> Java</label>
+                  <label><input type="checkbox" name="tech" value="sql"> SQL</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-secondary">📢 Publier l'offre</button>
+              <button type="reset" class="btn btn-outline">🔄 Annuler</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Formulaire évaluation stagiaire -->
+        <div id="evaluer" style="margin-top:2rem;">
+          <h2 class="section-title">Évaluer un Stagiaire</h2>
+          <form class="form-card" action="https://httpbin.org/get" method="GET">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="stagiaire-nom">Nom du stagiaire *</label>
+                <input type="text" id="stagiaire-nom" name="stagiaire" placeholder="Nom complet" required>
+              </div>
+              <div class="form-group">
+                <label for="note-eval">Note globale (sur 20) *</label>
+                <input type="number" id="note-eval" name="note" min="0" max="20" placeholder="ex: 16" required>
+              </div>
+              <div class="form-group full">
+                <label>Critères d'évaluation</label>
+                <div class="radio-group" style="flex-direction:column;">
+                  <label><input type="radio" name="sérieux" value="excellent"> ⭐⭐⭐ Sérieux et ponctualité — Excellent</label>
+                  <label><input type="radio" name="sérieux" value="bien" checked> ⭐⭐ Sérieux et ponctualité — Bien</label>
+                  <label><input type="radio" name="sérieux" value="passable"> ⭐ Sérieux et ponctualité — Passable</label>
+                </div>
+              </div>
+              <div class="form-group full">
+                <label for="commentaire-eval">Commentaire *</label>
+                <textarea id="commentaire-eval" name="commentaire" placeholder="Votre évaluation détaillée du stagiaire..." rows="4" required></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-secondary">⭐ Soumettre l'évaluation</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>InternShip Manager</h4>
+        <p>Plateforme universitaire de gestion des stages académiques.</p>
+        <p>© 2026 InternShip Manager</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="offres.html">Offres de Stage</a>
+        <a href="espace-etudiant.html">Espace Étudiant</a>
+        <a href="espace-entreprise.html">Espace Entreprise</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>📧 <a href="mailto:contact@internship-manager.tn">contact@internship-manager.tn</a></p>
+        <p>📞 +216 71 000 000</p>
+        <p>📍 Université de Tunis, Tunis, Tunisie</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Site Web de Gestion des Stages — Projet de Développement Web 2026
+    </div>
+  </footer>
+</body>
+</html>

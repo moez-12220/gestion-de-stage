@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questionnaire — InternShip Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Styles des messages d'erreur de validation */
+    .err-msg {
+      display: none;
+      color: #dc3545;
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+    /* Compteur de caractères pour le textarea */
+    #compteur-commentaire {
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    /* Message de succès après soumission */
+    #msg-succes {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    #msg-succes .succes-icon { font-size: 4rem; }
+    #msg-succes h2 { color: var(--green); margin: 1rem 0 0.5rem; }
+
+    /* Étoiles de notation (radio stylisées) */
+    .star-rating {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .star-rating label {
+      cursor: pointer;
+      font-size: 1.4rem;
+      filter: grayscale(1);
+      transition: filter 0.15s, transform 0.15s;
+    }
+    .star-rating input { display: none; }
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      filter: none;
+    }
+    /* Inverser l'ordre pour l'effet CSS pur */
+    .star-rating { flex-direction: row-reverse; justify-content: flex-end; }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label { filter: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap">
+        <span style="font-size:2rem;">🎓</span>
+        <span class="logo-text">InternShip Manager</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="offres.html">Offres</a></li>
+          <li><a href="espace-etudiant.html">Espace Étudiant</a></li>
+          <li><a href="espace-entreprise.html">Espace Entreprise</a></li>
+          <li><a href="questionnaire.html" class="active">Questionnaire</a></li>
+          <li><a href="funpage.html">Fun Page 🎮</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="section-title">📝 Questionnaire — Votre Avis Compte !</h1>
+    <p style="text-align:center;color:var(--gray-text);margin-bottom:2rem;">
+      Aidez-nous à améliorer InternShip Manager en partageant votre expérience.
+    </p>
+
+    <div style="max-width:680px;margin:0 auto;">
+
+      <!-- ===== MESSAGE DE SUCCÈS (affiché après validation) ===== -->
+      <div id="msg-succes">
+        <div class="succes-icon">🎉</div>
+        <h2>Merci pour votre avis !</h2>
+        <p style="color:var(--gray-text);">Votre questionnaire a été soumis avec succès. Votre retour est précieux pour nous.</p>
+        <a href="index.html" class="btn btn-secondary" style="margin-top:1.5rem;">🏠 Retour à l'accueil</a>
+      </div>
+
+      <!-- ===== FORMULAIRE QUESTIONNAIRE ===== -->
+      <form class="form-card" id="form-questionnaire" novalidate>
+        <div class="form-title">📋 Partagez votre expérience</div>
+
+        <div class="form-grid" style="grid-template-columns:1fr;">
+
+          <!-- Champ 1 : Nom (textbox) -->
+          <div class="form-group">
+            <label for="q-nom">Nom complet *</label>
+            <input type="text" id="q-nom" name="nom" placeholder="Votre nom et prénom">
+            <div class="err-msg" id="err-nom"></div>
+          </div>
+
+          <!-- Champ 2 : Email (textbox email) -->
+          <div class="form-group">
+            <label for="q-email">Adresse email *</label>
+            <input type="email" id="q-email" name="email" placeholder="votre@email.tn">
+            <div class="err-msg" id="err-email"></div>
+          </div>
+
+          <!-- Champ 3 : Profil (select) -->
+          <div class="form-group">
+            <label for="q-profil">Vous êtes</label>
+            <select id="q-profil" name="profil">
+              <option value="">-- Sélectionner votre profil --</option>
+              <option value="etudiant">🎓 Étudiant</option>
+              <option value="entreprise">🏢 Représentant d'entreprise</option>
+              <option value="enseignant">📚 Enseignant / Encadrant</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+
+          <!-- Champ 4 : Satisfaction globale (radio) -->
+          <div class="form-group">
+            <label>Satisfaction globale * <small style="color:var(--gray-text);">(sélectionnez une étoile)</small></label>
+            <div class="radio-group" style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+              <label><input type="radio" name="satisfaction" value="5"> ⭐⭐⭐⭐⭐ Excellent</label>
+              <label><input type="radio" name="satisfaction" value="4"> ⭐⭐⭐⭐ Bien</label>
+              <label><input type="radio" name="satisfaction" value="3"> ⭐⭐⭐ Moyen</label>
+              <label><input type="radio" name="satisfaction" value="2"> ⭐⭐ Insuffisant</label>
+              <label><input type="radio" name="satisfaction" value="1"> ⭐ Mauvais</label>
+            </div>
+            <div class="err-msg" id="err-satisfaction"></div>
+          </div>
+
+          <!-- Champ 5 : Fonctionnalités utilisées (checkboxes) -->
+          <div class="form-group">
+            <label>Fonctionnalités que vous avez utilisées * <small style="color:var(--gray-text);">(plusieurs choix possibles)</small></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="fonctionnalites" value="recherche"> 🔍 Recherche de stages</label>
+              <label><input type="checkbox" name="fonctionnalites" value="candidature"> 📝 Candidature en ligne</label>
+              <label><input type="checkbox" name="fonctionnalites" value="suivi"> 📊 Suivi de stage</label>
+              <label><input type="checkbox" name="fonctionnalites" value="entreprise"> 🏢 Espace entreprise</label>
+              <label><input type="checkbox" name="fonctionnalites" value="contact"> 📧 Contact</label>
+            </div>
+            <div class="err-msg" id="err-fonctionnalites"></div>
+          </div>
+
+          <!-- Champ 6 : Recommandation (radio) -->
+          <div class="form-group">
+            <label>Recommanderiez-vous notre plateforme ?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="recommandation" value="oui"> ✅ Oui, certainement</label>
+              <label><input type="radio" name="recommandation" value="peutetre"> 🤔 Peut-être</label>
+              <label><input type="radio" name="recommandation" value="non"> ❌ Non</label>
+            </div>
+          </div>
+
+          <!-- Champ 7 : Commentaire (textarea) -->
+          <div class="form-group">
+            <label for="q-commentaire">Commentaire libre * <small style="color:var(--gray-text);">(minimum 20 caractères)</small></label>
+            <textarea id="q-commentaire" name="commentaire" rows="5"
+              placeholder="Partagez votre expérience, vos suggestions d'amélioration..."></textarea>
+            <div id="compteur-commentaire">Encore 20 caractères minimum</div>
+            <div class="err-msg" id="err-commentaire"></div>
+          </div>
+
+          <!-- Champ 8 : Consentement (checkbox) -->
+          <div class="form-group">
+            <label>
+              <input type="checkbox" name="consentement" id="q-consentement">
+              J'accepte que mes réponses soient utilisées pour améliorer la plateforme.
+            </label>
+          </div>
+
+        </div><!-- /.form-grid -->
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-secondary">📨 Envoyer mon avis</button>
+          <button type="reset"  class="btn btn-outline">🔄 Réinitialiser</button>
+        </div>
+      </form>
+
+      <!-- Liens de navigation vers les nouvelles pages -->
+      <div style="display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;">
+        <a href="funpage.html" class="btn btn-outline">🎮 Fun Page</a>
+        <a href="contact.html" class="btn btn-outline">📧 Contact</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>InternShip Manager</h4>
+        <p>Plateforme universitaire de gestion des stages académiques.</p>
+        <p>© 2026 InternShip Manager</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="questionnaire.html">Questionnaire</a>
+        <a href="funpage.html">Fun Page</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">Site Web de Gestion des Stages — Projet de Développement Web 2026</div>
+  </footer>
+
+  <script src="js/questionnaire.js"></script>
+</body>
+</html>

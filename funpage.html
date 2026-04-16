@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Page — InternShip Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== STYLES SPÉCIFIQUES À LA FUN PAGE ===== */
+
+    /* Zone principale du jeu */
+    .fun-hero {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    /* Conteneur du jeu : illustre la propagation des événements */
+    #zone-propagation {
+      background: #e8f4fd;
+      border: 3px dashed var(--blue-light);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem auto;
+      max-width: 560px;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+    }
+    #zone-propagation:hover { background: #d0eaf9; }
+
+    /* Zone de jeu imbriquée (niveau 2) */
+    #zone-jeu {
+      background: #fff9e6;
+      border: 2px solid var(--orange);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin: 0.8rem auto;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #zone-jeu:hover { background: #fff3cc; }
+
+    /* Élément interactif imbriqué (niveau 3) */
+    #element-interactif {
+      background: white;
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      padding: 0.8rem 1.5rem;
+      display: inline-block;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--green);
+      transition: transform 0.15s, background 0.2s;
+      user-select: none;
+    }
+    #element-interactif:hover {
+      transform: scale(1.05);
+      background: var(--green-light);
+    }
+
+    /* Journal des événements de propagation */
+    #log-propagation {
+      background: #1e2a38;
+      color: #a8d8a8;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      max-height: 150px;
+      overflow-y: auto;
+      text-align: left;
+      margin: 1rem auto;
+      max-width: 560px;
+    }
+    .log-entry { margin-bottom: 0.3rem; animation: fadeIn 0.3s ease; }
+    .log-div    { color: #7ec8e3; }
+    .log-jeu    { color: #ffd580; }
+    .log-btn    { color: #a8d8a8; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity:1; transform:none; } }
+
+    /* ===== JEU : Attrape les stages ===== */
+    #jeu-conteneur {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e8f5e9 100%);
+      border: 2px solid var(--blue-light);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      max-width: 640px;
+    }
+    #jeu-terrain {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      background: white;
+      border-radius: 10px;
+      border: 2px dashed #ccc;
+      overflow: hidden;
+      cursor: crosshair;
+      margin: 1rem 0;
+    }
+    /* Cible volante (offre de stage à attraper) */
+    .cible {
+      position: absolute;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: none;
+      user-select: none;
+      animation: none;
+    }
+    /* Tableau de score */
+    .score-bar {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .score-item {
+      background: white;
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: var(--shadow);
+      min-width: 100px;
+      text-align: center;
+    }
+    .score-item span { display: block; font-size: 0.75rem; font-weight: 400; color: var(--gray-text); }
+
+    /* Boutons du jeu */
+    .jeu-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+
+    /* Effets visuels lors d'un clic réussi */
+    .pop { animation: pop 0.3s ease forwards; }
+    @keyframes pop {
+      0%  { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.8; }
+      100%{ transform: scale(0); opacity: 0; }
+    }
+
+    /* Feedback "raté" */
+    .miss-effect {
+      position: absolute;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: miss 0.6s ease forwards;
+    }
+    @keyframes miss {
+      0%  { opacity: 1; transform: translateY(0); }
+      100%{ opacity: 0; transform: translateY(-40px); }
+    }
+
+    /* Message de fin de partie */
+    #fin-message {
+      display: none;
+      background: var(--blue-dark);
+      color: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    #fin-message h3 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap">
+        <span style="font-size:2rem;">🎓</span>
+        <span class="logo-text">InternShip Manager</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="offres.html">Offres</a></li>
+          <li><a href="espace-etudiant.html">Espace Étudiant</a></li>
+          <li><a href="espace-entreprise.html">Espace Entreprise</a></li>
+          <li><a href="questionnaire.html">Questionnaire</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="funpage.html" class="active">Fun Page 🎮</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== TITRE ===== -->
+    <div class="fun-hero">
+      <h1 class="section-title">🎮 Fun Page — Attrape le Stage !</h1>
+      <p style="color:var(--gray-text);max-width:500px;margin:0 auto;">
+        Teste tes réflexes ! Attrape un maximum d'offres de stage avant que le temps soit écoulé.
+        <br>Bonne chance ! 🚀
+      </p>
+    </div>
+
+    <!-- ===== JEU PRINCIPAL : Attrape les stages ===== -->
+    <div id="jeu-conteneur">
+      <h2 class="section-title" style="font-size:1.2rem;">🏆 Score</h2>
+
+      <!-- Tableau de score -->
+      <div class="score-bar">
+        <div class="score-item">
+          <strong id="score-val">0</strong>
+          <span>Points</span>
+        </div>
+        <div class="score-item">
+          <strong id="timer-val">30</strong>
+          <span>Secondes</span>
+        </div>
+        <div class="score-item">
+          <strong id="rate-val">0</strong>
+          <span>Ratés</span>
+        </div>
+      </div>
+
+      <!-- Terrain de jeu -->
+      <div id="jeu-terrain">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#ccc;font-size:1rem;text-align:center;pointer-events:none;" id="msg-debut">
+          Clique sur <strong>Démarrer</strong> pour jouer !
+        </div>
+      </div>
+
+      <!-- Message de fin -->
+      <div id="fin-message">
+        <h3>⏰ Temps écoulé !</h3>
+        <p id="fin-texte"></p>
+        <button class="btn btn-secondary" id="btn-rejouer" style="margin-top:0.8rem;">🔄 Rejouer</button>
+      </div>
+
+      <!-- Boutons -->
+      <div class="jeu-btns">
+        <button class="btn btn-secondary" id="btn-demarrer">▶️ Démarrer</button>
+        <button class="btn btn-outline"   id="btn-pause" disabled>⏸️ Pause</button>
+        <button class="btn btn-outline"   id="btn-stop"  disabled>⏹️ Stop</button>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--gray-text);text-align:center;margin-top:0.8rem;">
+        💼 Clique sur les offres de stage avant qu'elles disparaissent !
+      </p>
+    </div>
+
+    <!-- ===== SECTION PROPAGATION DES ÉVÉNEMENTS ===== -->
+    <div style="max-width:640px;margin:0 auto 2rem;">
+      <h2 class="section-title" style="font-size:1.2rem;">🔬 Propagation des Événements (Event Bubbling)</h2>
+      <p style="color:var(--gray-text);font-size:0.9rem;margin-bottom:1rem;">
+        Clique sur les différentes zones pour observer la propagation des événements dans le DOM.
+        Le bouton vert utilise <code>stopPropagation()</code> pour bloquer la remontée.
+      </p>
+
+      <!-- Élément 1 : div externe (niveau 1) -->
+      <div id="zone-propagation">
+        <p style="font-weight:700;color:var(--blue-dark);margin:0 0 0.5rem;">
+          🔵 Zone Extérieure (DIV — niveau 1)
+        </p>
+
+        <!-- Élément 2 : zone de jeu (niveau 2) -->
+        <div id="zone-jeu">
+          <p style="font-weight:700;color:var(--orange);margin:0 0 0.8rem;">
+            🟠 Zone de Jeu (DIV — niveau 2)
+          </p>
+
+          <!-- Élément 3 : bouton interactif (niveau 3) -->
+          <div style="text-align:center;">
+            <span id="element-interactif">
+              🟢 Bouton Interactif (stopPropagation ici !)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journal de propagation -->
+      <div id="log-propagation">
+        <div class="log-entry" style="color:#888;">— Clique sur une zone pour voir les événements —</div>
+      </div>
+
+      <button class="btn btn-outline" id="btn-vider-log" style="display:block;margin:0 auto;">
+        🗑️ Vider le journal
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ===== PIED DE PAGE ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>InternShip Manager</h4>
+        <p>Plateforme universitaire de gestion des stages académiques.</p>
+        <p>© 2026 InternShip Manager</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="questionnaire.html">Questionnaire</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">Site Web de Gestion des Stages — Projet de Développement Web 2026</div>
+  </footer>
+
+  <script src="js/funpage.js"></script>
+</body>
+</html>
